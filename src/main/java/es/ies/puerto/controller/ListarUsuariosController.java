@@ -9,6 +9,7 @@ import es.ies.puerto.model.UsuarioEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 /**
  *   @author: alejandrosalazargonzalez
@@ -16,9 +17,9 @@ import javafx.scene.control.Label;
  */
 public class ListarUsuariosController extends AbstractController {
     @FXML Button atrasButton;
-    @FXML Label usuariosLabel;
+    @FXML ListView listViewUsuarios;
 
-    @FXML 
+    @FXML
     public void initialize(){
         ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
         try {
@@ -26,11 +27,7 @@ public class ListarUsuariosController extends AbstractController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String usuariosStr = "";
-        for (UsuarioEntity usuarioEntity : usuarios) {
-            usuariosStr += usuarioEntity.toString() + "\n";
-        }
-        usuariosLabel.setText(usuariosStr);
+        listViewUsuarios.getItems().addAll(usuarios);
     }
     @FXML
     public void atrasOnClick(){

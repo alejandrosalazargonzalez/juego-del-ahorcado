@@ -103,10 +103,10 @@ public class UsuarioEntity {
 
     @Override
     public String toString() {
-        return "{" + "usuario" + getUsuario() +
-                ", email=" + getEmail() +
-                ", contrasenia=" + getContrasenia() +
-                "}";
+        return getUsuario() +
+                ", " + getEmail() +
+                ", " + getPuntos() +
+                ", " + getNivel();
     }
 
 }
