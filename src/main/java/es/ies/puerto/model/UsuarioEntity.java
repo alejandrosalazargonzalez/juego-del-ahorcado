@@ -24,17 +24,15 @@ public class UsuarioEntity {
      *
      * @param usuario     del usuario
      * @param email       del usuario
-     * @param nombre      del usuario
      * @param contrasenia del usuario
      * @throws Exception
      */
-    public UsuarioEntity(String usuario, String email, String nombre, String contrasenia) throws ExceptionInInitializerError{
+    public UsuarioEntity(String usuario, String email, String contrasenia) throws ExceptionInInitializerError{
         if (!email.contains("@") || !email.contains(".") ) {
             throw new ExceptionInInitializerError("El email debe tener un formato correcto");
         }
         this.usuario = usuario;
         this.email = email;
-        this.nombre = nombre;
         this.contrasenia = contrasenia;
     }
 
@@ -56,14 +54,6 @@ public class UsuarioEntity {
             throw new ExceptionInInitializerError("El email debe tener un formato correcto");
         }
         this.email = email;
-    }
-
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getContrasenia() {
@@ -94,7 +84,6 @@ public class UsuarioEntity {
     public String toString() {
         return "{" + "usuario" + getUsuario() +
                 ", email=" + getEmail() +
-                ", nombre=" + getNombre() +
                 ", contrasenia=" + getContrasenia() +
                 "}";
     }

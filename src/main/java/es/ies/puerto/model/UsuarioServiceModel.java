@@ -113,7 +113,7 @@ public class UsuarioServiceModel extends Conexion {
                 String nombreStr = resultado.getString("nombre");
                 String contraseniaStr = resultado.getString("contrasenia");
                 String emailStr = resultado.getString("email");
-                UsuarioEntity usuarioModel = new UsuarioEntity(usuarioStr,emailStr, nombreStr, contraseniaStr);
+                UsuarioEntity usuarioModel = new UsuarioEntity(usuarioStr,emailStr, contraseniaStr);
                 usuarios.add(usuarioModel);
             }
         } catch (Exception e) {
@@ -135,8 +135,7 @@ public class UsuarioServiceModel extends Conexion {
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
             stmt.setString(1, usuario.getUsuario());
             stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getNombre());
-            stmt.setString(4, usuario.getContrasenia());
+            stmt.setString(3, usuario.getContrasenia());
             stmt.executeUpdate();
             return true;
         } catch (Exception e) {

@@ -4,6 +4,7 @@ package es.ies.puerto.controller;
 import java.io.IOException;
 
 import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
  *   @author: alejandrosalazargonzalez
  *   @version: 1.0.0
  */
-public class RecuperarController {
+public class RecuperarController extends AbstractController {
 
     @FXML private Button regresarButton;
 
@@ -23,15 +24,6 @@ public class RecuperarController {
      */
     @FXML
     public void recuperarToLoginOnClick(){
-        try {
-            Stage stage = (Stage)regresarButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("app-init.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-            stage.setTitle("pagina Login");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cambiarPantalla(regresarButton,"app-init");
     }
 }

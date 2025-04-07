@@ -1,20 +1,14 @@
-
 package es.ies.puerto.controller;
 
-import java.io.IOException;
-
-import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 /**
  *   @author: alejandrosalazargonzalez
  *   @version: 1.0.0
  */
-public class InicioController extends LoginController{
+public class InicioController extends AbstractController{
     
     @FXML private Button editarButton;
     @FXML private Button jugarButton;
@@ -25,17 +19,7 @@ public class InicioController extends LoginController{
      */
     @FXML
     public void inicioToRegistrarOnClick(){
-        setRegresar(false);
-        try {
-            Stage stage = (Stage)regresarButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("registrar.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-            stage.setTitle("pagina registro");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cambiarPantalla(editarButton, "registrar");
     }
 
     /**
@@ -43,16 +27,7 @@ public class InicioController extends LoginController{
      */
     @FXML
     public void inicioToPartidaOnClick(){
-        try {
-            Stage stage = (Stage)regresarButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("juego.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-            stage.setTitle("pagina registro");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cambiarPantalla(jugarButton, "juego");
     }
 
     /**
@@ -60,15 +35,6 @@ public class InicioController extends LoginController{
      */
     @FXML
     public void inicioToLoginOnClick(){
-        try {
-            Stage stage = (Stage)regresarButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("app-init.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-            stage.setTitle("pagina registro");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cambiarPantalla(regresarButton,"app-init");
     }
 }

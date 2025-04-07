@@ -1,50 +1,95 @@
-
 package es.ies.puerto.controller;
 
-import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.controller.abstractas.AbstractController;
+import es.ies.puerto.model.UsuarioEntity;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  *   @author: alejandrosalazargonzalez
  *   @version: 1.0.0
  */
-public class Registrar extends LoginController{
+public class Registrar extends AbstractController{
     
     @FXML private Button regresarButton;
-    
+    @FXML private TextField userTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField passwordField2;
+    @FXML private TextField emailTextField1;
+    @FXML private TextField emailTextField11;
+    @FXML private Text errorText;
     /**
      * dependiendo del valor de regresar va a una pantalla o a otra
      */
     @FXML
     public void regresarOnClick(){
-        if (getRegresar()) {
+        cambiarPantalla(regresarButton,"app-init");
+    }
+
+    @FXML
+    public void guardarUsuarioOnClick(){
+        if (!comprobarRegistrar()) {
+            return;
+        }
+        UsuarioEntity nuevoUsuario = new UsuarioEntity(userTextField.getText(), emailTextField1.getText(),passwordField.getText());
+        ArrayList<UsuarioEntity> usuarioEntityList;
         try {
-            Stage stage = (Stage)regresarButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("app-init.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-            stage.setTitle("pagina Login");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+            usuarioEntityList = getUsuarioServiceModel().obtenerUsarios();
+        if (usuarioEntityList.contains(nuevoUsuario)) {
+            errorText.setText("Ya hay una cuenta registrada con ese correo");
+            return;
+        }
+        if (getUsuarioServiceModel().obtenerUsuarioPorUsuario(userTextField.getText()) != null) {
+            errorText.setText("Ya hay una cuenta registrada con ese usuario");
+            return;
+        }
+            getUsuarioServiceModel().addUsuario(nuevoUsuario);
+        } catch (SQLException e) {
             e.printStackTrace();
+            errorText.setText("error no controlado");
         }
-        }else{
-            try {
-                Stage stage = (Stage)regresarButton.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("inicio.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-                stage.setTitle("pagina inicio");
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        regresarOnClick();
+    }
+
+    /**
+     * comprueba que los campos sean validos
+     * @return true/false
+     */
+    private boolean comprobarRegistrar(){
+        if(!comprobarTextField(userTextField)){
+            errorText.setText("Usuario no puede estar vacio");
+            return false;
         }
+        if(!comprobarTextField(passwordField)){
+            errorText.setText("Contrasenia no puede estar vacio");
+            return false;
+        }
+        if(!comprobarTextField(passwordField2)){
+            errorText.setText("Repetir contrasenia no puede estar vacio");
+            return false;
+        }
+        if (!passwordField.getText().equals(passwordField2.getText()) ) {
+            errorText.setText("La contrasenia repetida debe ser igual");
+            return false;
+        }
+        if(!comprobarTextField(emailTextField1)){
+            errorText.setText("El correo no puede estar vacio");
+            return false;
+        }
+        if(!comprobarTextField(emailTextField11)) {
+            errorText.setText("Correo repetir de los valores puede estar vacio");
+            return false;
+        }
+        if (!emailTextField1.getText().equals(emailTextField11.getText()) ) {
+            errorText.setText("Los correos deben ser iguales");
+            return false;
+        }
+        return true;
     }
 }
