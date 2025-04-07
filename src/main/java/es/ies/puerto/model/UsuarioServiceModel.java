@@ -37,7 +37,7 @@ public class UsuarioServiceModel extends Conexion {
      * @throws SQLException
      */
     public ArrayList<UsuarioEntity> obtenerUsarios() throws SQLException {
-        String sql = "SELECT * FROM Usuario";
+        String sql = "SELECT * FROM usuarios";
         return leerSql(sql);
     }
 
@@ -48,7 +48,7 @@ public class UsuarioServiceModel extends Conexion {
      */
     public UsuarioEntity obtenerUsuarioPorEmail(String email) {
         try {
-            String sql = "SELECT * FROM Usuario " + "where email='"+email+"'";
+            String sql = "SELECT * FROM usuarios " + "where email='"+email+"'";
         ArrayList<UsuarioEntity> usuarios = leerSql(sql);
         if (usuarios.isEmpty()) {
             return null;
@@ -68,7 +68,7 @@ public class UsuarioServiceModel extends Conexion {
      */
     public UsuarioEntity obtenerUsuarioPorUsuario(String usuario) {
         try {
-            String sql = "SELECT * FROM Usuario " + "where nombreUsuario='"+usuario+"'";
+            String sql = "SELECT * FROM usuarios " + "where user='"+usuario+"'";
         ArrayList<UsuarioEntity> usuarios = leerSql(sql);
         if (usuarios.isEmpty()) {
             return null;
@@ -91,7 +91,7 @@ public class UsuarioServiceModel extends Conexion {
         if (usuario == null) {
             return false;
         }
-        String sql = "INSERT INTO Usuario (nombreUsuario, email, nombre, contrasenia) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (user, email, password, puntos, id_nivel) VALUES ( ?, ?, ?, ?, ?)";
         return ejecutarUpdate(sql, usuario);
     }
 
@@ -109,11 +109,12 @@ public class UsuarioServiceModel extends Conexion {
             ResultSet resultado = sentencia.executeQuery();
 
             while (resultado.next()) {
-                String usuarioStr = resultado.getString("nombreUsuario");
-                String nombreStr = resultado.getString("nombre");
-                String contraseniaStr = resultado.getString("contrasenia");
+                String userStr = resultado.getString("user");
                 String emailStr = resultado.getString("email");
-                UsuarioEntity usuarioModel = new UsuarioEntity(usuarioStr,emailStr, contraseniaStr);
+                String passwordStr = resultado.getString("password");
+                
+                
+                UsuarioEntity usuarioModel = new UsuarioEntity(userStr,emailStr, passwordStr);
                 usuarios.add(usuarioModel);
             }
         } catch (Exception e) {
@@ -136,6 +137,8 @@ public class UsuarioServiceModel extends Conexion {
             stmt.setString(1, usuario.getUsuario());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getContrasenia());
+            stmt.setInt(4, usuario.getPuntos());
+            stmt.setInt(5, usuario.getNivel());
             stmt.executeUpdate();
             return true;
         } catch (Exception e) {

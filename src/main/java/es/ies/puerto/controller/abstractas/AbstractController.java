@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public abstract class AbstractController {
     static final String PATH_DB ="src/main/resources/usuarios.db";
     private UsuarioServiceModel usuarioServiceModel;
-    Scene pantallaAnterior;
+    String pantallaAnterior;
     /**
      * Constructor
      */
@@ -43,7 +43,7 @@ public abstract class AbstractController {
      * retorna la pantalla anterior;
      * @return
      */
-    public Scene getPantallaAnterior(){
+    public String getPantallaAnterior(){
         return pantallaAnterior;
     }
 
@@ -54,9 +54,9 @@ public abstract class AbstractController {
      */
     @FXML
     public void cambiarPantalla( Button botton, String pantalla){
+        pantallaAnterior = botton.getScene().getWindow().toString();
         try {
             Stage stage = (Stage) botton.getScene().getWindow();
-            pantallaAnterior = stage.getScene();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantalla+".fxml"));
             Scene scene;
             scene = new Scene(fxmlLoader.load(), 350, 500);

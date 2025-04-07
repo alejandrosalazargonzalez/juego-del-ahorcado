@@ -1,18 +1,11 @@
-
 package es.ies.puerto.controller;
 
-import java.io.IOException;
-
-import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.UsuarioEntity;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 /**
@@ -23,6 +16,7 @@ public class LoginController extends AbstractController {
 
     @FXML private Button aceptarButton;
     @FXML private Button registrarButton;
+    @FXML private Button listarUsuarios;
     @FXML private Button recuperarButton;
     @FXML private TextField userEmailTextField;
     @FXML private PasswordField passwordField;
@@ -61,6 +55,10 @@ public class LoginController extends AbstractController {
         cambiarPantalla(registrarButton, "registrar");
     }
 
+    @FXML
+    public void loginToListarOnClick(){
+        cambiarPantalla(listarUsuarios, "listarUsuarios");
+    }
     /**
      * cambia a la pantalla de recuperar
      */

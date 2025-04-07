@@ -1,14 +1,8 @@
 package es.ies.puerto.controller;
 
-import java.io.IOException;
-
-import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 /**
  *   @author: alejandrosalazargonzalez
@@ -17,7 +11,12 @@ import javafx.stage.Stage;
 public class JuegoController extends AbstractController {
     
     @FXML Button regresarButton;
+    @FXML private Button reiniciarButton;
 
+    @FXML
+    public void reiniciarOnClick(){
+        
+    }
     /**
      * va a la pantalla de inicio
      */
