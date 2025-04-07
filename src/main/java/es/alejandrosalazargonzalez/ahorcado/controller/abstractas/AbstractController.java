@@ -1,10 +1,10 @@
 
-package es.ies.puerto.controller.abstractas;
+package es.alejandrosalazargonzalez.ahorcado.controller.abstractas;
 
 import java.io.IOException;
 
-import es.ies.puerto.PrincipalApplication;
-import es.ies.puerto.model.UsuarioServiceModel;
+import es.alejandrosalazargonzalez.ahorcado.PrincipalApplication;
+import es.alejandrosalazargonzalez.ahorcado.model.UsuarioServiceModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

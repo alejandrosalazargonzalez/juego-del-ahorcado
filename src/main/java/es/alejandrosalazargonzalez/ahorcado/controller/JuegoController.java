@@ -1,6 +1,6 @@
-package es.ies.puerto.controller;
+package es.alejandrosalazargonzalez.ahorcado.controller;
 
-import es.ies.puerto.controller.abstractas.AbstractController;
+import es.alejandrosalazargonzalez.ahorcado.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

@@ -1,4 +1,4 @@
-package es.ies.puerto;
+package es.alejandrosalazargonzalez.ahorcado;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

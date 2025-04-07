@@ -1,4 +1,4 @@
-package es.ies.puerto.model;
+package es.alejandrosalazargonzalez.ahorcado.model;
 
 import java.util.Objects;
 

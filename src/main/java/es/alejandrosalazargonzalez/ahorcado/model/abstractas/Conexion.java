@@ -1,4 +1,4 @@
-package es.ies.puerto.model.abstractas;
+package es.alejandrosalazargonzalez.ahorcado.model.abstractas;
 
 import java.io.File;
 import java.sql.Connection;

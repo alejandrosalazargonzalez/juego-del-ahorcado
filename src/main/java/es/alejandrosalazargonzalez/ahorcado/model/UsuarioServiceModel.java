@@ -1,12 +1,12 @@
 
-package es.ies.puerto.model;
+package es.alejandrosalazargonzalez.ahorcado.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import es.ies.puerto.model.abstractas.Conexion;
+import es.alejandrosalazargonzalez.ahorcado.model.abstractas.Conexion;
 
 
 /**

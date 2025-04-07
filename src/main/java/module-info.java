@@ -1,4 +1,4 @@
-module es.ies.puerto {
+module es.alejandrosalazargonzalez.ahorcado {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -7,11 +7,11 @@ module es.ies.puerto {
     requires transitive java.sql;
     
 
-    opens es.ies.puerto to javafx.fxml;
-    exports es.ies.puerto;
-    exports es.ies.puerto.controller;
-    exports es.ies.puerto.controller.abstractas;
-    exports es.ies.puerto.model;
-    exports es.ies.puerto.model.abstractas;
-    opens es.ies.puerto.controller to javafx.fxml;
+    opens es.alejandrosalazargonzalez.ahorcado to javafx.fxml;
+    exports es.alejandrosalazargonzalez.ahorcado;
+    exports es.alejandrosalazargonzalez.ahorcado.controller;
+    exports es.alejandrosalazargonzalez.ahorcado.controller.abstractas;
+    exports es.alejandrosalazargonzalez.ahorcado.model;
+    exports es.alejandrosalazargonzalez.ahorcado.model.abstractas;
+    opens es.alejandrosalazargonzalez.ahorcado.controller to javafx.fxml;
 }

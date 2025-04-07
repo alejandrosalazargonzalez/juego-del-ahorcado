@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.ies.puerto</groupId>
+    <groupId>es.alejandrosalazargonzalez.ahorcado</groupId>
     <artifactId>mi-app-fx</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>mi-app-fx</name>
@@ -93,7 +93,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>es.ies.puerto.PrincipalApplication</mainClass>
+                    <mainClass>es.alejandrosalazargonzalez.ahorcado.PrincipalApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
