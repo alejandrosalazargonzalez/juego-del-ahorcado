@@ -1,9 +1,9 @@
-
 package es.alejandrosalazargonzalez.ahorcado.controller.abstractas;
 
 import java.io.IOException;
 
 import es.alejandrosalazargonzalez.ahorcado.PrincipalApplication;
+import es.alejandrosalazargonzalez.ahorcado.model.UsuarioEntity;
 import es.alejandrosalazargonzalez.ahorcado.model.UsuarioServiceModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,8 @@ import javafx.stage.Stage;
 public abstract class AbstractController {
     static final String PATH_DB ="src/main/resources/usuarios.db";
     private UsuarioServiceModel usuarioServiceModel;
-    String pantallaAnterior;
+
+    static UsuarioEntity usuarioActual;
     /**
      * Constructor
      */
@@ -40,13 +41,21 @@ public abstract class AbstractController {
     }
 
     /**
-     * retorna la pantalla anterior;
-     * @return
+     * setea al usuario actual
+     * 
+     * @param usuario a ser el actual
      */
-    public String getPantallaAnterior(){
-        return pantallaAnterior;
+    public void setUsuarioActual(UsuarioEntity usuario){
+        this.usuarioActual = usuario;
     }
 
+    /**
+     * retorna el usuario actual
+     * @return UsuarioEntity
+     */
+    public UsuarioEntity getUsuarioActual(){
+        return usuarioActual;
+    }
     /**
      * cambia a la pantalla indicada usando el boton que se le pasa como referencia
      * @param botton
@@ -54,7 +63,6 @@ public abstract class AbstractController {
      */
     @FXML
     public void cambiarPantalla( Button botton, String pantalla){
-        pantallaAnterior = botton.getScene().getWindow().toString();
         try {
             Stage stage = (Stage) botton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantalla+".fxml"));

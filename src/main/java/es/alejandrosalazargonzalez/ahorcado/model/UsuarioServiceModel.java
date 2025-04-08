@@ -1,4 +1,3 @@
-
 package es.alejandrosalazargonzalez.ahorcado.model;
 
 import java.sql.PreparedStatement;
@@ -112,8 +111,6 @@ public class UsuarioServiceModel extends Conexion {
                 String userStr = resultado.getString("user");
                 String emailStr = resultado.getString("email");
                 String passwordStr = resultado.getString("password");
-                
-                
                 UsuarioEntity usuarioModel = new UsuarioEntity(userStr,emailStr, passwordStr);
                 usuarios.add(usuarioModel);
             }
@@ -149,4 +146,60 @@ public class UsuarioServiceModel extends Conexion {
         }
     }
     
+    /**
+     * recoge una palabra de forma aleatoria de la base de datos teniendo en cuenta
+     * la dificulta escogida por el usuario
+     *
+     * @param nombreUsuario
+     * @return String
+     * @throws SQLException
+     */
+    public String obtenerPalabraAleatoriaPorUsuario(String nombreUsuario) throws SQLException {
+        String palabra = null;
+        try {
+            UsuarioEntity usuario = obtenerUsuarioPorUsuario(nombreUsuario);
+            if (usuario == null) {
+                throw new SQLException("No se encontró el usuario: " + nombreUsuario);
+            }
+            int idNivel = usuario.getNivel();
+            String sql = "SELECT palabra FROM palabras WHERE id_nivel = ? ORDER BY RANDOM() LIMIT 1";
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+                stmt.setInt(1, idNivel);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        palabra = rs.getString("palabra");
+                    }
+                }
+            }
+            if (palabra == null || palabra.isEmpty()) {
+                throw new SQLException("No se encontró ninguna palabra para el nivel: " + idNivel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return palabra;
+    }
+
+    /**
+     * actualiza los puntos de un usuario en la base de datos.
+     *
+     * @param nombreUsuario el usuario
+     * @param nuevosPuntos los puntos a asignar
+     * @return true/false
+     * @throws SQLException
+     */
+    public void actualizarPuntosUsuario(String nombreUsuario, int nuevosPuntos) throws SQLException {
+        String sql = "UPDATE usuarios SET puntos = ? WHERE user = ?";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+            stmt.setInt(1, nuevosPuntos);
+            stmt.setString(2, nombreUsuario);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+    }
 }

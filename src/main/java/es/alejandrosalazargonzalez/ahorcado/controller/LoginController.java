@@ -44,6 +44,7 @@ public class LoginController extends AbstractController {
             errorText.setText("error en usuario o contraseña");
             return;
         }
+        setUsuarioActual(usuario);
         cambiarPantalla(aceptarButton, "inicio");
     }
 

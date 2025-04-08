@@ -8,7 +8,6 @@ import es.alejandrosalazargonzalez.ahorcado.controller.abstractas.AbstractContro
 import es.alejandrosalazargonzalez.ahorcado.model.UsuarioEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 /**
